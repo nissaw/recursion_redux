@@ -4,7 +4,22 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-){
-  // your code here
+
+
+var getElementsByClassName = function(className, node) {
+
+  node = node || document.body;
+  var nodes = [];
+ 
+
+  var classes = node.className.split(' ');
+  if ( classes.indexOf( className ) >= 0 ) {
+  	nodes.push(node);
+  }
+  for (var i = 0 ; i < node.children.length; i++) {
+  	var results = getElementsByClassName(className, node.children[i]);
+  	nodes = nodes.concat(results);
+  }
+
+  return nodes;
 };
